@@ -1,0 +1,29 @@
+spring:
+    datasource:
+        driverClassName: org.h2.Driver
+        password: password
+        url: jdbc:h2:mem:testdb
+        username: sa
+    h2:
+        console:
+            enabled: true
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
+
+    cache:
+        cache-names:
+        - buckets
+        caffeine:
+            spec: maximumSize=1000000,expireAfterAccess=3600s
+bucket4j:
+  enabled: true
+  filters:
+  - cache-name: buckets
+    url: .*/mesurements
+    rate-limits:
+    - bandwidths:
+      - capacity: 10
+        time: 1
+        unit: minutes
